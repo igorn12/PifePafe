@@ -6,7 +6,8 @@ import java.util.Random;
 public class Baralho {
     private Random aleatorio;
     private ArrayList<Carta> cartas = new ArrayList<>();
-    private int cont=0;
+    private ArrayList<Carta> maco = new ArrayList<>();
+    private int cont=0, cont2=0;
 
     public Baralho() {
         this.cartas = cartas;
@@ -46,5 +47,15 @@ public class Baralho {
         }
         return maoJogador;
     }
-
+    public void iniciarBolo(){
+        for (int i = cont; i < cartas.size(); i++) {
+            maco.add(cartas.get(cont));
+            cont++;
+        }
+        System.out.println("BOLO : "+maco.get(cont2));
+    }
+    public ArrayList<Carta> iniciarLixeira(){
+        ArrayList<Carta> lixeira = new ArrayList<>();
+        return lixeira;
+    }
 }

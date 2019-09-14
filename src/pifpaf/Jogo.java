@@ -28,5 +28,6 @@ public class Jogo {
         for (Jogador j : jogadores){
             j.mostrarCartas();
         }
+        baralho.iniciarBolo();
     }
 }
