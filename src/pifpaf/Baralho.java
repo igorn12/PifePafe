@@ -6,8 +6,8 @@ import java.util.Random;
 public class Baralho {
     private Random aleatorio;
     private ArrayList<Carta> cartas = new ArrayList<>();
-    private ArrayList<Carta> maco = new ArrayList<>();
-    private int cont=0, cont2=0;
+    private Carta[] maco, bolo;
+    private int cont=0, cont2=0, cont3 = 0;
 
     public Baralho() {
         this.cartas = cartas;
@@ -20,6 +20,18 @@ public class Baralho {
                 cartas.add(new Carta(face[j], naipe[i]));
             }
         }
+    }
+
+    public void setBolo(Carta[] bolo) {
+        this.bolo = bolo;
+    }
+
+    public void setCartas(ArrayList<Carta> cartas) {
+        this.cartas = cartas;
+    }
+
+    public void setMaco(Carta[] maco) {
+        this.maco = maco;
     }
 
     public void mostrarBaralho(){
@@ -48,14 +60,18 @@ public class Baralho {
         return maoJogador;
     }
     public void iniciarBolo(){
-        for (int i = cont; i < cartas.size(); i++) {
-            maco.add(cartas.get(cont));
-            cont++;
+        int num = cont;
+        for (int i = num; i < cartas.size(); i++) {
+            maco[i] = cartas.get(cont);
+            num++;
         }
-        System.out.println("BOLO : "+maco.get(cont2));
     }
-    public ArrayList<Carta> iniciarLixeira(){
-        ArrayList<Carta> lixeira = new ArrayList<>();
-        return lixeira;
+    
+    public void mostrarBolo(){
+        System.out.println("BOLO : "+maco[cont].toString());
+    }
+    
+    public void mostrarLixeira(){
+        System.out.println("Lixeira : "+bolo[cont3].toString());   
     }
 }
