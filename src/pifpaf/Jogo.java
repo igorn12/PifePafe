@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Jogo {
-    private Scanner input = new Scanner(System.in);
-    private Baralho baralho = new Baralho();
-    private ArrayList<Jogador> jogadores = new ArrayList<>();
+    private final Scanner input = new Scanner(System.in);
+    private final Baralho baralho = new Baralho();
+    private final ArrayList<Jogador> jogadores = new ArrayList<>();
 
     public void iniciarJogo() {
         baralho.mostrarBaralho();
@@ -29,5 +29,19 @@ public class Jogo {
             j.mostrarCartas();
         }
         baralho.iniciarBolo();
+        baralho.mostrarBolo();
+    }
+    public void iniciarPifePafe(){
+        for(Jogador j : jogadores){
+            j.setMao(baralho.puxarDoBolo(j.getMao()));
+            j.mostrarCartas();
+            break;
+        }
+        System.out.println("jogador, escolha uma carta para descartar: ");
+        int opcao = input.nextInt();
+        do {
+            baralho.mostrarBolo();
+        } while (opcao != 0);
+        
     }
 }

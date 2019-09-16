@@ -6,8 +6,9 @@ import java.util.Random;
 public class Baralho {
     private Random aleatorio;
     private ArrayList<Carta> cartas = new ArrayList<>();
-    private Carta[] maco, bolo;
-    private int cont=0, cont2=0, cont3 = 0;
+    private ArrayList<Carta> lixeira = new ArrayList<>();
+    private ArrayList<Carta> maco = new ArrayList<>();
+    private int cont=0, cont2=0;
 
     public Baralho() {
         this.cartas = cartas;
@@ -22,15 +23,15 @@ public class Baralho {
         }
     }
 
-    public void setBolo(Carta[] bolo) {
-        this.bolo = bolo;
+    public void setBolo(ArrayList<Carta> lixeira) {
+        this.lixeira = lixeira;
     }
 
     public void setCartas(ArrayList<Carta> cartas) {
         this.cartas = cartas;
     }
 
-    public void setMaco(Carta[] maco) {
+    public void setMaco(ArrayList<Carta> maco) {
         this.maco = maco;
     }
 
@@ -40,6 +41,7 @@ public class Baralho {
             System.out.println(i.toString());
         }
     }
+
     public void embaralhar(){
         aleatorio = new Random();
         System.out.println("EMBARALHANDO");
@@ -59,19 +61,33 @@ public class Baralho {
         }
         return maoJogador;
     }
+        
     public void iniciarBolo(){
         int num = cont;
-        for (int i = num; i < cartas.size(); i++) {
-            maco[i] = cartas.get(cont);
+        for (int i = cont; i < cartas.size(); i++) {
+            maco.add(cartas.get(num));
             num++;
         }
     }
+        
+    public void mostrarBolo(){System.out.println("\nBOLO : "+maco.get(0)+"\n");}
     
-    public void mostrarBolo(){
-        System.out.println("BOLO : "+maco[cont].toString());
+    public ArrayList<Carta> puxarDoBolo(ArrayList<Carta> mao){
+        ArrayList<Carta> carta = new ArrayList<>(mao);
+        carta.add(maco.get(0));
+        maco.remove(0);
+        return carta;
     }
     
     public void mostrarLixeira(){
-        System.out.println("Lixeira : "+bolo[cont3].toString());   
+        if(!lixeira.isEmpty())
+            System.out.println("Lixeira : "+lixeira.get(lixeira.size()-1));   
+    }
+    public ArrayList<Carta> puxarDaLixeira(ArrayList<Carta> lixo){
+        ArrayList<Carta> carta = new ArrayList<>(lixo);
+        if(!lixeira.isEmpty())
+            carta.add(lixeira.get(lixeira.size()-1));
+            lixeira.remove(0);
+        return carta;
     }
 }

@@ -6,5 +6,6 @@ public class PifPaf {
         j.iniciarJogo();
         j.distribuirCartas(9);
         j.mostrarCartas();
+        j.iniciarPifePafe();
     }
 }

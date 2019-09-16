@@ -1,9 +1,9 @@
 package pifpaf;
 
 
-public class Carta {
-    private String face;
-    private String naipe;
+public class Carta{
+    private final String face;
+    private final String naipe;
 
     public Carta(String face, String naipe) {
         this.face = face;
@@ -12,6 +12,7 @@ public class Carta {
 
     @Override
     public String toString() {
-        return face+" de "+naipe;
+        return face+" De "+naipe;
     }
+    
 }
