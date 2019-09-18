@@ -8,32 +8,27 @@ public class Baralho {
     private ArrayList<Carta> cartas = new ArrayList<>();
     private ArrayList<Carta> lixeira = new ArrayList<>();
     private ArrayList<Carta> maco = new ArrayList<>();
-    private int cont=0, cont2=0;
+    private int cont=0;
 
     public Baralho() {
         this.cartas = cartas;
 
         String[] naipe = {"Paus", "Copas", "Espadas", "Ouros"};
         String[] face = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        String[] peso = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
 
         for (int i = 0; i < naipe.length; i++){
             for (int j = 0; j < face.length; j++){
-                cartas.add(new Carta(face[j], naipe[i]));
+                cartas.add(new Carta(face[j], naipe[i], peso[j]));
             }
         }
     }
 
-    public void setBolo(ArrayList<Carta> lixeira) {
-        this.lixeira = lixeira;
-    }
+    public void setBolo(ArrayList<Carta> lixeira) {this.lixeira = lixeira;}
 
-    public void setCartas(ArrayList<Carta> cartas) {
-        this.cartas = cartas;
-    }
+    public void setCartas(ArrayList<Carta> cartas) {this.cartas = cartas;}
 
-    public void setMaco(ArrayList<Carta> maco) {
-        this.maco = maco;
-    }
+    public void setMaco(ArrayList<Carta> maco) {this.maco = maco;}
 
     public void mostrarBaralho(){
         System.out.println("----------------- MOSTRANDO CARTAS ---------------");
@@ -53,6 +48,7 @@ public class Baralho {
             cartas.set(x,aux);
         }
     }
+    
     public ArrayList<Carta> distribuirCartas(int qtdCartas){
         ArrayList<Carta> maoJogador = new ArrayList<>();
         for (int i = 0 ; i < qtdCartas ; i++){
@@ -79,15 +75,23 @@ public class Baralho {
         return carta;
     }
     
-    public void mostrarLixeira(){
-        if(!lixeira.isEmpty())
-            System.out.println("Lixeira : "+lixeira.get(lixeira.size()-1));   
+    public void iniciarLixeira(Carta lixo){
+        lixeira.add(lixo);
     }
+    
+    public void mostrarLixeira(){
+        if(!lixeira.isEmpty()){
+            System.out.println("Lixeira : "+lixeira.get(lixeira.size()-1));
+        }else{
+            System.out.println("Lixeira vazia !!");
+        }
+    }
+    
     public ArrayList<Carta> puxarDaLixeira(ArrayList<Carta> lixo){
         ArrayList<Carta> carta = new ArrayList<>(lixo);
         if(!lixeira.isEmpty())
             carta.add(lixeira.get(lixeira.size()-1));
-            lixeira.remove(0);
+        lixeira.remove(0);
         return carta;
     }
 }
