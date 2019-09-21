@@ -6,11 +6,25 @@ public class Carta implements Comparable<Carta>{
     private final String face;
     private final String naipe;
     private final String peso;
+    private final int cont;
 
-    public Carta(String face, String naipe, String peso) {
+    public Carta(String face, String naipe, String peso, int cont) {
         this.face = face;
         this.naipe = naipe;
         this.peso = peso;
+        this.cont = cont;
+    }
+
+    public String getFace() {
+        return face;
+    }
+
+    public String getNaipe() {
+        return naipe;
+    }
+
+    public String getPeso() {
+        return peso;
     }
 
     @Override
@@ -20,10 +34,10 @@ public class Carta implements Comparable<Carta>{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + Objects.hashCode(this.face);
-        hash = 89 * hash + Objects.hashCode(this.naipe);
-        hash = 89 * hash + Objects.hashCode(this.peso);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.face);
+        hash = 53 * hash + Objects.hashCode(this.naipe);
+        hash = 53 * hash + Objects.hashCode(this.peso);
         return hash;
     }
 
@@ -39,24 +53,23 @@ public class Carta implements Comparable<Carta>{
             return false;
         }
         final Carta other = (Carta) obj;
-        if (this.peso != other.peso) {
-            return false;
-        }
         if (!Objects.equals(this.face, other.face)) {
             return false;
         }
         if (!Objects.equals(this.naipe, other.naipe)) {
             return false;
         }
+        if (!Objects.equals(this.peso, other.peso)) {
+            return false;
+        }
         return true;
     }
 
-    
-    
     @Override
     public int compareTo(Carta c) {
         if(this.peso.equals(c.peso))
-            return this.naipe.compareTo(c.naipe);
+            if(this.face.equals(c.face))
+                return this.naipe.compareTo(naipe);
         return this.peso.compareTo(c.peso);
     }
     

@@ -6,20 +6,22 @@ import java.util.Random;
 public class Baralho {
     private Random aleatorio;
     private ArrayList<Carta> cartas = new ArrayList<>();
+    private ArrayList<Carta> maoJogador;
     private ArrayList<Carta> lixeira = new ArrayList<>();
     private ArrayList<Carta> maco = new ArrayList<>();
-    private int cont=0;
+    private int cont=0, tamLix=0;
 
     public Baralho() {
         this.cartas = cartas;
 
         String[] naipe = {"Paus", "Copas", "Espadas", "Ouros"};
         String[] face = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-        String[] peso = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"};
+        String[] peso = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"};
+        int[] cont = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 
         for (int i = 0; i < naipe.length; i++){
             for (int j = 0; j < face.length; j++){
-                cartas.add(new Carta(face[j], naipe[i], peso[j]));
+                cartas.add(new Carta(face[j], naipe[i], peso[j], cont[j]));
             }
         }
     }
@@ -50,7 +52,7 @@ public class Baralho {
     }
     
     public ArrayList<Carta> distribuirCartas(int qtdCartas){
-        ArrayList<Carta> maoJogador = new ArrayList<>();
+        maoJogador = new ArrayList<>();
         for (int i = 0 ; i < qtdCartas ; i++){
             maoJogador.add(cartas.get(cont));
             cont++;
@@ -64,9 +66,10 @@ public class Baralho {
             maco.add(cartas.get(num));
             num++;
         }
+        tamLix = maco.size();
     }
         
-    public void mostrarBolo(){System.out.println("\nBOLO : "+maco.get(0)+"\n");}
+    public void mostrarBolo(){System.out.println("\n - >> BOLO : "+maco.get(0));}
     
     public ArrayList<Carta> puxarDoBolo(ArrayList<Carta> mao){
         ArrayList<Carta> carta = new ArrayList<>(mao);
@@ -75,13 +78,16 @@ public class Baralho {
         return carta;
     }
     
-    public void iniciarLixeira(Carta lixo){
+    public void lixeira(Carta lixo){
+        if(lixeira.size() == tamLix)    
+            maco.addAll(lixeira);
+            lixeira.clear();
         lixeira.add(lixo);
     }
     
     public void mostrarLixeira(){
         if(!lixeira.isEmpty()){
-            System.out.println("Lixeira : "+lixeira.get(lixeira.size()-1));
+            System.out.println(" ->> Lixeira : "+lixeira.get(lixeira.size()-1));
         }else{
             System.out.println("Lixeira vazia !!");
         }
@@ -93,5 +99,12 @@ public class Baralho {
             carta.add(lixeira.get(lixeira.size()-1));
         lixeira.remove(0);
         return carta;
+    }
+    
+    public ArrayList<Carta> removerCarta(Carta c){
+        if(maoJogador.contains(c)){
+            maoJogador.remove(maoJogador.indexOf(c));
+        }
+        return maoJogador;
     }
 }

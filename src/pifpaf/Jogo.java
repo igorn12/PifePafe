@@ -31,42 +31,44 @@ public class Jogo {
             j.mostrarCartas();
         }
         baralho.iniciarBolo();
-        baralho.mostrarBolo();
     }
     
     public void iniciarPifePafe(){
         int indice = 0;
-        for(Jogador j : jogadores){
-            j.setMao(baralho.puxarDoBolo(j.getMao()));
-            j.mostrarCartas();
-            break;
-        }
-        System.out.println("jogador, escolha uma carta para descartar: ");
-        indice = input.nextInt();
-        baralho.iniciarLixeira(jogadores.get(0).getMao().get(indice-1));
+        int opcao = 1;
         
-        int opcao;
         do {
-            System.out.println("----- MENU DO JOGO -----");
-            System.out.println("\n1 - puxar do bolozn2 - puxar da lixeira\n0 - sair");
-            System.out.println("Jogador informe sua jogada: ");
-            opcao = input.nextInt();
-            for (int i = 0 ; i < jogadores.size(); i++) {
+            for (Jogador j : jogadores) {
+                j.mostrarCartas();
                 baralho.mostrarBolo();
                 baralho.mostrarLixeira();
+                System.out.println("\n1 - puxar do bolo\n2 - puxar da lixeira\n0 - sair");
+                System.out.println("Jogador "+j.getNome()+", informe sua jogada: ");
+                opcao = input.nextInt();
+                
                 switch(opcao){
                 case 1:
-                    jogadores.get(i).setMao(baralho.puxarDoBolo(jogadores.get(i).getMao()));
-                    jogadores.get(i).mostrarCartas();
+                    j.setMao(baralho.puxarDoBolo(j.getMao()));
+                    j.mostrarCartas();
+                    System.out.println("jogador "+j.getNome()+", escolha uma carta para descartar: ");
+                    indice = input.nextInt();
+                    baralho.lixeira(j.getMao().get(indice));
+                    j.remover(j.getMao().get(indice));
                     break;
+                
                 case 2:
-                    jogadores.get(i).setMao(baralho.puxarDaLixeira(jogadores.get(i).getMao()));
-                    jogadores.get(i).mostrarCartas();
+                    j.setMao(baralho.puxarDaLixeira(j.getMao()));
+                    j.mostrarCartas();
+                    System.out.println("jogador "+j.getNome()+", escolha uma carta para descartar: ");
+                    indice = input.nextInt();
+                    baralho.lixeira(j.getMao().get(indice));
+                    j.remover(j.getMao().get(indice));
                     break;
+                
                 default:
                     System.out.println("Numero inválido;");
                     break;
-            }
+                }
             }
         } while (opcao != 0);
     }
