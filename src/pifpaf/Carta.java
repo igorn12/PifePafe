@@ -6,7 +6,7 @@ public class Carta implements Comparable<Carta>{
     private final String face;
     private final String naipe;
     private final String peso;
-    private final int cont;
+    private int cont=0;
 
     public Carta(String face, String naipe, String peso, int cont) {
         this.face = face;
@@ -27,6 +27,10 @@ public class Carta implements Comparable<Carta>{
         return peso;
     }
 
+    public int getCont() {
+        return cont;
+    }
+
     @Override
     public String toString() {
         return face+" De "+naipe;
@@ -35,9 +39,10 @@ public class Carta implements Comparable<Carta>{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.face);
-        hash = 53 * hash + Objects.hashCode(this.naipe);
-        hash = 53 * hash + Objects.hashCode(this.peso);
+        hash = 67 * hash + Objects.hashCode(this.face);
+        hash = 67 * hash + Objects.hashCode(this.naipe);
+        hash = 67 * hash + Objects.hashCode(this.peso);
+        hash = 67 * hash + this.cont;
         return hash;
     }
 
@@ -53,16 +58,16 @@ public class Carta implements Comparable<Carta>{
             return false;
         }
         final Carta other = (Carta) obj;
+        if (this.cont != other.cont) {
+            return false;
+        }
         if (!Objects.equals(this.face, other.face)) {
             return false;
         }
         if (!Objects.equals(this.naipe, other.naipe)) {
             return false;
         }
-        if (!Objects.equals(this.peso, other.peso)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.peso, other.peso);
     }
 
     @Override

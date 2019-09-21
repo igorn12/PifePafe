@@ -20,21 +20,23 @@ public class Jogo {
     }
     
     public void distribuirCartas(int qtdCartas){
-        for (Jogador j : jogadores){
+        jogadores.stream().map((j) -> {
             System.out.println("--- DISTRIBUINDO CARTAS ---");
+            return j;
+        }).forEachOrdered((j) -> {
             j.setMao(baralho.distribuirCartas(qtdCartas));
-        }
+        });
     }
     
     public void mostrarCartas(){
-        for (Jogador j : jogadores){
+        jogadores.forEach((j) -> {
             j.mostrarCartas();
-        }
+        });
         baralho.iniciarBolo();
     }
     
     public void iniciarPifePafe(){
-        int indice = 0;
+        int indice;
         int opcao = 1;
         
         do {
@@ -49,6 +51,7 @@ public class Jogo {
                 switch(opcao){
                 case 1:
                     j.setMao(baralho.puxarDoBolo(j.getMao()));
+                    j.verificaJogos();
                     j.mostrarCartas();
                     System.out.println("jogador "+j.getNome()+", escolha uma carta para descartar: ");
                     indice = input.nextInt();
@@ -58,6 +61,7 @@ public class Jogo {
                 
                 case 2:
                     j.setMao(baralho.puxarDaLixeira(j.getMao()));
+                    j.verificaJogos();
                     j.mostrarCartas();
                     System.out.println("jogador "+j.getNome()+", escolha uma carta para descartar: ");
                     indice = input.nextInt();

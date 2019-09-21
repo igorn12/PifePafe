@@ -17,11 +17,11 @@ public class Baralho {
         String[] naipe = {"Paus", "Copas", "Espadas", "Ouros"};
         String[] face = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
         String[] peso = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"};
-        int[] cont = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+        int[] contador = {-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-        for (int i = 0; i < naipe.length; i++){
-            for (int j = 0; j < face.length; j++){
-                cartas.add(new Carta(face[j], naipe[i], peso[j], cont[j]));
+        for (String naipe1 : naipe) {
+            for (int j = 0; j < face.length; j++) {
+                cartas.add(new Carta(face[j], naipe1, peso[j], contador[j]));
             }
         }
     }
@@ -81,13 +81,13 @@ public class Baralho {
     public void lixeira(Carta lixo){
         if(lixeira.size() == tamLix)    
             maco.addAll(lixeira);
-            lixeira.clear();
-        lixeira.add(lixo);
+                lixeira.clear();
+            lixeira.add(lixo);
     }
     
     public void mostrarLixeira(){
         if(!lixeira.isEmpty()){
-            System.out.println(" ->> Lixeira : "+lixeira.get(lixeira.size()-1));
+            System.out.println(" - >> Lixeira : "+lixeira.get(lixeira.size()-1));
         }else{
             System.out.println("Lixeira vazia !!");
         }
