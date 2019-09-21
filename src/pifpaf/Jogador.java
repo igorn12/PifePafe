@@ -54,6 +54,7 @@ public class Jogador {
                     }
                 }
             }
+            
             if(mao.get(a).getCont() == (mao.get(b).getCont() - 1)){
                 if(mao.get(b).getCont() == (mao.get(c).getCont() - 1)){
                     if(mao.get(a).getNaipe().equals(mao.get(b).getNaipe())){
@@ -77,6 +78,7 @@ public class Jogador {
             System.out.println(nome+" Venceu o jogo com: ");
                 System.out.println(vencer);
     }
+    
     public void removeCartas(){
         for (int i = 0; i < vencer.size(); i++) {
             mao.remove(vencer.get(i));

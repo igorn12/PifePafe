@@ -18,7 +18,7 @@ public class Baralho {
         String[] face = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
         String[] peso = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"};
         int[] contador = {-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
+        
         for (String naipe1 : naipe) {
             for (int j = 0; j < face.length; j++) {
                 cartas.add(new Carta(face[j], naipe1, peso[j], contador[j]));
