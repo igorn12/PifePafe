@@ -39,32 +39,22 @@ public class Jogador {
         mao.remove(removivel);
     }
     
-    public void verificaJogos(){
-        for (int a = 0 ; a < 6 ; a++) {
+    public void verificaJogos(ArrayList<Carta> mao){
+        for (int a = 0 ; a < mao.size() ; a++) {
             int b = 1;
             int c = 2;
             if(mao.get(a).getFace().equals(mao.get(b).getFace())){
                 if(mao.get(b).getFace().equals(mao.get(c).getFace())){
-                    if(!vencer.contains(mao.get(a)) && !vencer.contains(mao.get(b)) && !vencer.contains(mao.get(c))){
-                                vencer.add(mao.get(a));
-                                vencer.add(mao.get(b));
-                                vencer.add(mao.get(c));
-                                removeCartas();
-                                System.out.println(vencer);
-                    }
-                }
-            }
-            
-            if(mao.get(a).getCont() == (mao.get(b).getCont() - 1)){
-                if(mao.get(b).getCont() == (mao.get(c).getCont() - 1)){
-                    if(mao.get(a).getNaipe().equals(mao.get(b).getNaipe())){
-                        if(mao.get(b).getNaipe().equals(mao.get(c).getNaipe())){
-                            if(!vencer.contains(mao.get(a)) && !vencer.contains(mao.get(b)) && !vencer.contains(mao.get(c))){
-                                vencer.add(mao.get(a));
-                                vencer.add(mao.get(b));
-                                vencer.add(mao.get(c));
-                                removeCartas();
-                                System.out.println(vencer);
+                    if(mao.get(c).getFace().equals(mao.get(a).getFace())){
+                        if(!mao.get(a).getNaipe().equals(mao.get(b).getNaipe())){
+                            if(!mao.get(b).getNaipe().equals(mao.get(c).getNaipe())){
+                                if(!mao.get(c).getNaipe().equals(mao.get(a).getNaipe())){
+                                    vencer.add(mao.get(a));
+                                    vencer.add(mao.get(b));
+                                    vencer.add(mao.get(c));
+                                    removeCartas();
+                                    System.out.println("Fez uma trinca !");
+                                }
                             }
                         }
                     }
@@ -73,15 +63,46 @@ public class Jogador {
             b++;
             c++;
         }
-        
-        if(vencer.size() == 8)
-            System.out.println(nome+" Venceu o jogo com: ");
-                System.out.println(vencer);
+
+        for (int a = 0 ; a < mao.size() ; a++) {
+            int b = 1;
+            int c = 2;
+            if(mao.get(a).getCont() == (mao.get(b).getCont() - 1)){
+                if(mao.get(b).getCont() == (mao.get(c).getCont() - 1)){
+                    if(mao.get(c).getCont() == (mao.get(c).getCont() + 2)){
+                        if(mao.get(a).getNaipe().equals(mao.get(b).getNaipe())){
+                            if(mao.get(b).getNaipe().equals(mao.get(c).getNaipe())){
+                                if(mao.get(c).getNaipe().equals(mao.get(a).getNaipe())){
+                                    vencer.add(mao.get(a));
+                                    vencer.add(mao.get(b));
+                                    vencer.add(mao.get(c));
+                                    removeCartas();
+                                    System.out.println("Fez uma sequencia !");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            b++;
+            c++;
+        }
     }
     
     public void removeCartas(){
         for (int i = 0; i < vencer.size(); i++) {
-            mao.remove(vencer.get(i));
+            this.mao.remove(vencer.get(i));
+        }
+    }
+    
+    public void mostrarVencedor(){
+        if(vencer.size() == 9){
+            System.out.println(nome+"\n Venceu com: ");
+            for (Carta v : vencer) {
+            System.out.println(v.toString());
+            }
+        }else{
+            System.out.println("Não venceu ainda !!");
         }
     }
 }

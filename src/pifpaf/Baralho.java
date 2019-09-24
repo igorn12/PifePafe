@@ -17,7 +17,7 @@ public class Baralho {
         String[] naipe = {"Paus", "Copas", "Espadas", "Ouros"};
         String[] face = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
         String[] peso = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"};
-        int[] contador = {-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] contador = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         
         for (String naipe1 : naipe) {
             for (int j = 0; j < face.length; j++) {
@@ -97,6 +97,11 @@ public class Baralho {
         ArrayList<Carta> carta = new ArrayList<>(lixo);
         if(!lixeira.isEmpty())
             carta.add(lixeira.get(lixeira.size()-1));
+        
+        if (lixeira.size() == 0 || lixeira == null){
+            System.out.println("A lixeira está vazia");
+            return carta;
+        }
         lixeira.remove(0);
         return carta;
     }

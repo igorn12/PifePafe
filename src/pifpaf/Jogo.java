@@ -20,18 +20,16 @@ public class Jogo {
     }
     
     public void distribuirCartas(int qtdCartas){
-        jogadores.stream().map((j) -> {
+        for (Jogador j : jogadores) {
             System.out.println("--- DISTRIBUINDO CARTAS ---");
-            return j;
-        }).forEachOrdered((j) -> {
             j.setMao(baralho.distribuirCartas(qtdCartas));
-        });
+        }
     }
     
     public void mostrarCartas(){
-        jogadores.forEach((j) -> {
+        for (Jogador j : jogadores) {
             j.mostrarCartas();
-        });
+        }
         baralho.iniciarBolo();
     }
     
@@ -51,24 +49,24 @@ public class Jogo {
                 switch(opcao){
                 case 1:
                     j.setMao(baralho.puxarDoBolo(j.getMao()));
-                    j.verificaJogos();
                     j.mostrarCartas();
                     System.out.println("jogador "+j.getNome()+", escolha uma carta para descartar: ");
                     indice = input.nextInt();
                     baralho.lixeira(j.getMao().get(indice));
                     j.remover(j.getMao().get(indice));
+                    j.verificaJogos(j.getMao());
+                    j.mostrarVencedor();
                     break;
-                
                 case 2:
                     j.setMao(baralho.puxarDaLixeira(j.getMao()));
-                    j.verificaJogos();
                     j.mostrarCartas();
                     System.out.println("jogador "+j.getNome()+", escolha uma carta para descartar: ");
                     indice = input.nextInt();
                     baralho.lixeira(j.getMao().get(indice));
                     j.remover(j.getMao().get(indice));
+                    j.verificaJogos(j.getMao());
+                    j.mostrarVencedor();
                     break;
-                
                 default:
                     System.out.println("Numero inválido;");
                     break;
